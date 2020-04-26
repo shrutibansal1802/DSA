@@ -44,16 +44,35 @@ void free_singly_linked_list(SinglyLinkedListNode* node) {
     }
 }
 
+// Complete the insertNodeAtPosition function below.
+
+SinglyLinkedListNode* insertNodeAtPosition(SinglyLinkedListNode* head, int data, int position) {
+    SinglyLinkedListNode* temp =new SinglyLinkedListNode(data);
+    SinglyLinkedListNode* hhead =head;
+    if (position==0)
+        {
+            temp->next=head;
+            head=temp;
+            
+        }
+    else if(position==1)
+    {
+        temp->next=head->next;
+        head->next=temp;
+    }
+    else
+    {while(--position)
+    {
+        hhead=hhead->next;
+    }
+    temp->next=hhead->next;
+        hhead->next=temp;
+    }
+  return head;  
+}
+
 // Complete the insertNodeAtTail function below.
 
-
- 
-//   SinglyLinkedListNode {
-//       int data;
-//       SinglyLinkedListNode* next;
-//   };
- 
- 
 SinglyLinkedListNode* insertNodeAtTail(SinglyLinkedListNode* head, int data) {
     
 	SinglyLinkedListNode* temp =new SinglyLinkedListNode(data);
@@ -78,6 +97,57 @@ SinglyLinkedListNode* insertNodeAtTail(SinglyLinkedListNode* head, int data) {
     }
 
 }
+
+// Complete the deleteNode function below.
+
+SinglyLinkedListNode* deleteNode(SinglyLinkedListNode* head, int position) {
+
+     if(head==NULL)
+     return head;
+
+ SinglyLinkedListNode* temp=head;
+
+
+if (position==0)
+{
+    head=temp->next;
+    delete temp;
+}
+
+else
+{
+   for (int i=0; temp!=NULL && i<position-1; i++)
+    {
+            temp=temp->next;
+    }
+     SinglyLinkedListNode* p=temp->next->next;
+   
+    delete temp->next;
+    temp->next=p;
+}
+
+return head;
+  
+}
+// Complete the reverse function below.
+
+SinglyLinkedListNode* reverse(SinglyLinkedListNode* head) {
+
+    SinglyLinkedListNode* pre = NULL;
+    SinglyLinkedListNode* nex = NULL;
+    SinglyLinkedListNode* curr= head;
+
+    while(curr!=NULL)
+    {
+        nex=curr->next;
+        curr->next=pre;
+        pre=curr;
+        curr=nex;
+    }
+    head=pre;
+    return head;
+}
+
 
 int main()
 {
